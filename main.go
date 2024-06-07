@@ -80,7 +80,18 @@ func getVideoURL(entryUrl string) (string, string, error) {
 }
 
 func titleToFilename(title string) string {
-	return regexp.MustCompile("[^A-z0-9 _]+").ReplaceAllString(title, "-")
+	title = strings.ReplaceAll(title, "ą", "a")
+	title = strings.ReplaceAll(title, "ć", "c")
+	title = strings.ReplaceAll(title, "ę", "e")
+	title = strings.ReplaceAll(title, "ł", "l")
+	title = strings.ReplaceAll(title, "ń", "n")
+	title = strings.ReplaceAll(title, "ó", "o")
+	title = strings.ReplaceAll(title, "ś", "s")
+	title = strings.ReplaceAll(title, "ź", "z")
+	title = strings.ReplaceAll(title, "ż", "z")
+	re := regexp.MustCompile("[^A-z0-9 _]+")
+	title = re.ReplaceAllString(title, "")
+	return title
 }
 
 func download(title string, url string) error {
